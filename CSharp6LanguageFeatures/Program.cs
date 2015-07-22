@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+// Static using.
 using static System.Console;
 
 namespace CSharp6LanguageFeatures
 {
   class Program
+
   {
     // Dictionary index initializers.
-    private static Dictionary<Type, string> _s_typeNamesOld = new Dictionary<Type, string>()
+    private static Dictionary<Type, string> _s_typeNamesOldSyntax = new Dictionary<Type, string>()
     {
       { typeof(int), "int" },
       { typeof(string), "string" },
       { typeof(bool), "bool" }
     };
-    private static Dictionary<Type, string> _s_typeNamesNew = new Dictionary<Type, string>()
+    private static Dictionary<Type, string> _s_typeNamesNewSyntax = new Dictionary<Type, string>()
     {
       [typeof(int)] = "int",
       [typeof(string)] = "string",
@@ -54,19 +56,17 @@ namespace CSharp6LanguageFeatures
     }
 
 
-    private static void AutoPropertyInitializers()
-    {
-      var snapshot1 = new Snapshot();
-      WriteLine(snapshot1);
-    }
-
-
     public class Notifier
     {
       public event EventHandler StateChanged;
 
       public void ChangeState()
       {
+        //var handler = this.StateChanged;
+        //if (handler != null)
+        //{
+        //  handler(this, EventArgs.Empty);
+        //}
         this.StateChanged?.Invoke(this, EventArgs.Empty);
       }
 
@@ -79,12 +79,12 @@ namespace CSharp6LanguageFeatures
         }
         catch (Exception ex)
         {
-          await this.LogAsync(ex.ToString());
+          await this.LogAsync(ex.ToString()); // Ok in C# 6
           throw;
         }
         finally
         {
-          await this.LogAsync("Leaving ChangeStateAsync...");
+          await this.LogAsync("Leaving ChangeStateAsync..."); // Ok in C# 6
         }
       }
 
